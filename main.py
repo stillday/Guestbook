@@ -33,9 +33,26 @@ class MainHandler(BaseHandler):
     def get(self):
         return self.render_template("hello.html")
 
+    def post(self):
+        result = self.request.get("book")
+
+        msg = Message(message_text=result)
+        msg.put
+
+        self.write(result)
+        self.render_remplate("hello.html")
+
+
 class Message(ndb.Model):
     message_text = ndb.StringProperty()
 
+class BookListHandler(BaseHandler):
+    def get(self):
+        messages = Message.query().fetch()
+        params = {"messages": messages}
+        return self.render_template("book_entry.html", params=params)
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
+    webapp2.Route('/book-entry', BookListHandler),
 ], debug=True)

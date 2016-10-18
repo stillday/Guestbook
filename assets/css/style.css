@@ -1,0 +1,32 @@
+body {
+    background-color: orange;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+h2 {
+    text-align: center;
+}
+
+img {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    wight: 614px;
+    height: 437px;
+}
+
+input[required] {
+  border-color: red;
+}

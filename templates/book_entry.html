@@ -9,32 +9,25 @@
     <h1>List of all messages</h1>
 
     <table>
-        <thead>
-            <tr>
-                <th>Gast Name</th>
-                <th>Gast E-Mail Adresse</th>
-                <th>Gästebuch Eingabe</th>
-            </tr>
-        </thead>
         <tbody>
         {% for message in messages %}
             <tr>
-                <td> <strong>{{ message.user_name }}</strong></td>
-                <td> <strong>{{ message.mail_adress }}</strong></td>
-                <td> <strong>{{ message.created }}</strong></td>
+                <td> <strong>Gast:</strong> {{ message.user_name }}</td>
+                <td> <strong>E-Mail Adresse:</strong> {{ message.mail_adress }}</td>
+                <td> <strong>Erstellt am:</strong> {{ message.created }}</td>
             </tr>
             <tr>
                 <td colspan="3">{{ message.message_text }}</td>
             </tr>
             <tr>
                 <td><strong>Gast von</strong></td>
-                <td><strong>bis</strong></td>
-                <td></td>
+                <td colspan="2"><strong>bis</strong></td>
+
             </tr>
             <tr>
                 <td> {{ message.user_start }}</td>
                 <td> {{ message.user_end }}</td>
-                <td> </td>
+
             </tr>
         {% endfor %}
         </tbody>

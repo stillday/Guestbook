@@ -24,14 +24,12 @@
 
     <table>
         <tbody>
-        {% for message in messages %}
+        {% for hommess in hommesse %}
             <tr>
-                <td>{{ message.user_name }}</td>
-                <td></td>
-                <td></td>
+                <td><strong>Unser Gast</strong>{{ hommess.user_name }}</td>
             </tr>
             <tr>
-                <td colspan="3">{{ message.message_text }}</td>
+                <td colspan="3">{{ hommess.message_text }}</td>
             </tr>
          {% endfor %}
         </tbody>

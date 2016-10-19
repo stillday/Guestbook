@@ -63,8 +63,8 @@ class BookListHandler(BaseHandler):
 
 class HomeListHandler(BaseHandler):
     def get(self):
-        messages = Message.query().fetch()
-        params = {"messages": messages}
+        hommesse = Message.query().fetch()
+        params = {"hommesse": hommesse}
         return self.render_template("hello.html", params=params)
 
 app = webapp2.WSGIApplication([

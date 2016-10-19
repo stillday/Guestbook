@@ -9,10 +9,13 @@
 <body>
     <h1>Hello, in my small Guestbook!</h1>
 
-    <form>
-        <input type="text" name="name" />
-        <input type="text" name="Email" /><br>
-        <input type="text" name="book" required="required" /><br>
+    <form method="post">
+
+        <p><input type="text" name="name" placeholder="Ihren Namen Bitte" />
+        <input type="email" name="email" placeholder="Ihre E-Mail Adresse Bitte" /></p>
+        <p>Von wann bis wann waren Sie bei uns?<br>
+        <input type="date" name="begin" placeholder="Von" /><input type="date" name="end" placeholder="Bis" /></p>
+        <textarea name="book" cols="47" rows="10" required="required" placeholder="Wie fanden Sie den Aufenthalt in unserem Haus"></textarea><br>
         <button type="submit">Absenden</button>
         <button type="reset">Reset</button>
     </form>

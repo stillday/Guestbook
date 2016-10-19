@@ -6,8 +6,21 @@
 </head>
 <body>
     <h1>List of all messages</h1>
-    {% for message in messages %}
-    <p>{{ messages }}</p>
-    {% endfor %}
+
+    <table>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.user_name }}</td>
+                <td>{{ message.mail_adress }}</td>
+                <td>{{ message.created }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{ message.message_text }}</td>
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>

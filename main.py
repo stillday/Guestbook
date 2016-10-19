@@ -34,17 +34,26 @@ class MainHandler(BaseHandler):
         return self.render_template("hello.html")
 
     def post(self):
-        result = self.request.get("book")
+        user = self.request.get("name")
+        mail = self.request.get("email")
+        note = self.request.get("book")
+        von = self.request.get("begin")
+        bis = self.request.get("end")
 
-        msg = Message(message_text=result)
-        msg.put
-
-        self.write(result)
-        self.render_remplate("hello.html")
+        msg = Message(user_name = user, mail_adress = mail, user_start = von, user_end = bis, message_text = note)
+        msg.put()
+        self.write("Vielen Dank für Ihren Eintrag")
+        self.render_template("hello.html")
 
 
 class Message(ndb.Model):
+    user_name = ndb.StringProperty()
+    mail_adress = ndb.StringProperty()
     message_text = ndb.StringProperty()
+    user_start = ndb.StringProperty()
+    user_end = ndb.StringProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+
 
 class BookListHandler(BaseHandler):
     def get(self):

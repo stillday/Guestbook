@@ -19,5 +19,22 @@
         <button type="submit">Absenden</button>
         <button type="reset">Reset</button>
     </form>
+
+    <h2>Guestbook</h2>
+
+    <table>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.user_name }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">{{ message.message_text }}</td>
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

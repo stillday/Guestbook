@@ -3,24 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Guestbook Entry</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <h1>List of all messages</h1>
 
     <table>
+        <thead>
+            <tr>
+                <th>Gast Name</th>
+                <th>Gast E-Mail Adresse</th>
+                <th>Gästebuch Eingabe</th>
+            </tr>
+        </thead>
         <tbody>
         {% for message in messages %}
             <tr>
-                <td>{{ message.user_name }}</td>
-                <td>{{ message.mail_adress }}</td>
-                <td>{{ message.created }}</td>
+                <td> <strong>{{ message.user_name }}</strong></td>
+                <td> <strong>{{ message.mail_adress }}</strong></td>
+                <td> <strong>{{ message.created }}</strong></td>
             </tr>
             <tr>
                 <td colspan="3">{{ message.message_text }}</td>
             </tr>
-         {% endfor %}
+            <tr>
+                <td><strong>Gast von</strong></td>
+                <td><strong>bis</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> {{ message.user_start }}</td>
+                <td> {{ message.user_end }}</td>
+                <td> </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+<br>
 
 </body>
 </html>

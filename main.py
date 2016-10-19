@@ -61,7 +61,14 @@ class BookListHandler(BaseHandler):
         params = {"messages": messages}
         return self.render_template("book_entry.html", params=params)
 
+class HomeListHandler(BaseHandler):
+    def get(self):
+        messages = Message.query().fetch()
+        params = {"messages": messages}
+        return self.render_template("hello.html", params=params)
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
+    webapp2.Route('/', HomeListHandler),
     webapp2.Route('/book-entry', BookListHandler),
 ], debug=True)

@@ -15,24 +15,25 @@
         <input type="email" name="email" placeholder="Ihre E-Mail Adresse Bitte" /></p>
         <p>Von wann bis wann waren Sie bei uns?<br>
         <input type="date" name="begin" placeholder="Von" /><input type="date" name="end" placeholder="Bis" /></p>
-        <textarea name="book" cols="47" rows="10" required="required" placeholder="Wie fanden Sie den Aufenthalt in unserem Haus"></textarea><br>
+        <textarea name="book" cols="47" rows="10" required placeholder="Wie fanden Sie den Aufenthalt in unserem Haus"></textarea><br>
         <button type="submit">Absenden</button>
         <button type="reset">Reset</button>
     </form>
 
     <h2>Guestbook</h2>
 
-    <table>
-        <tbody>
-        {% for hommess in hommesse %}
-            <tr>
-                <td><strong>Unser Gast</strong>{{ hommess.user_name }}</td>
-            </tr>
-            <tr>
-                <td colspan="3">{{ hommess.message_text }}</td>
-            </tr>
-         {% endfor %}
-        </tbody>
-    </table>
+    <div class="book">
+    {% for hommess in hommesse %}
+    <p>
+        <strong>Gast: </strong> {{ hommess.user_name }}<br>
+        <strong>Gast von: </strong> {{ hommess.user_start }}  <strong>bis: </strong> {{hommess.user_end}}
+    </p>
+    <p>
+        <h3>Gustbook Entry</h3>
+        {{ hommess.message_text }}
+    </p>
+    <hr>
+    {% endfor %}
+    </div>
 </body>
 </html>

@@ -6,33 +6,26 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    <h1>List of all messages</h1>
+    <h1>List of all Gustbook Messages</h1>
 
-    <table>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td> <strong>Gast:</strong> {{ message.user_name }}</td>
-                <td> <strong>E-Mail Adresse:</strong> {{ message.mail_adress }}</td>
-                <td> <strong>Erstellt am:</strong> {{ message.created }}</td>
-            </tr>
-            <tr>
-                <td colspan="3">{{ message.message_text }}</td>
-            </tr>
-            <tr>
-                <td><strong>Gast von</strong></td>
-                <td colspan="2"><strong>bis</strong></td>
+    {% for message in messages %}
+    <p>
+        <strong>Gast: </strong> {{ message.user_name }}<br>
+        <strong>E_Mail Adresse: </strong> {{ message.mail_adress }} <strong>Erstellt am: </strong> {{ message.created }} <br>
+        <strong>Gast von: </strong> {{ message.user_start }}  <strong>bis: </strong> {{message.user_end}}
+    </p>
+    <p>
+        <h3>Gustbook Entry</h3>
+        {{ message.message_text }}
+    </p>
+    <p>
+        <strong>Entry ID:</strong> {{ message.key.id() }}<br>
+        <a href="/message/{{ message.key.id() }}/edit">Edit messages</a>
+        <a href="/message/{{ message.key.id() }}/delete">Delete messages</a>
+    </p>
+    <hr>
+    {% endfor %}
 
-            </tr>
-            <tr>
-                <td> {{ message.user_start }}</td>
-                <td> {{ message.user_end }}</td>
-
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-<br>
 
 </body>
 </html>

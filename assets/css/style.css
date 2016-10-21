@@ -36,7 +36,10 @@ table, td, th {
     text-align: left;
 }
 
-table {
+div.book {
+    text-align: center;
+}
+/*table {
     border-collapse: collapse;
     width: 100%;
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/message/{{ message.key.id() }}/edit" method="post">
+        <textarea name="some_text" cols="47" rows="10">{{ message.message_text }}</textarea>
+        <br>
+        <button type="submit">OK</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>

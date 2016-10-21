@@ -31,7 +31,9 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("hello.html")
+        hommesse = Message.query(Message.deleted == False).fetch()
+        params = {"hommesse": hommesse}
+        return self.render_template("hello.html", params=params)
 
     def post(self):
         user = self.request.get("name")
@@ -43,7 +45,9 @@ class MainHandler(BaseHandler):
         msg = Message(user_name = user, mail_adress = mail, user_start = von, user_end = bis, message_text = note)
         msg.put()
         self.write("Vielen Dank für Ihren Eintrag")
-        self.render_template("hello.html")
+        hommesse = Message.query().fetch()
+        params = {"hommesse": hommesse}
+        return self.render_template("hello.html", params=params)
 
 
 class Message(ndb.Model):
@@ -53,7 +57,7 @@ class Message(ndb.Model):
     user_start = ndb.StringProperty()
     user_end = ndb.StringProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
-
+    deleted = ndb.BooleanProperty(default=False)
 
 class BookListHandler(BaseHandler):
     def get(self):
@@ -61,14 +65,34 @@ class BookListHandler(BaseHandler):
         params = {"messages": messages}
         return self.render_template("book_entry.html", params=params)
 
-class HomeListHandler(BaseHandler):
-    def get(self):
-        hommesse = Message.query().fetch()
-        params = {"hommesse": hommesse}
-        return self.render_template("hello.html", params=params)
+class EditMessageHandler(BaseHandler):
+    def get(self, message_id):
+        message = Message.get_by_id(int(message_id))
+        params = {"message": message}
+        return self.render_template("message_edit.html", params=params)
+
+    def post(self, message_id):
+        new_text = self.request.get("some_text")
+        message = Message.get_by_id(int(message_id))
+        message.message_text = new_text
+        message.put()
+        return self.redirect_to("msg-list")
+
+class DeleteMessageHandler(BaseHandler):
+    def get(self, message_id):
+        message = Message.get_by_id(int(message_id))
+        params = {"message": message}
+        return self.render_template("message_delete.html", params=params)
+
+    def post(self, message_id):
+        message = Message.get_by_id(int(message_id))
+        message.deleted = True
+        message.put()
+        return self.redirect_to("msg-list")
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
-    webapp2.Route('/', HomeListHandler),
-    webapp2.Route('/book-entry', BookListHandler),
+    webapp2.Route('/book-entry', BookListHandler, name="msg-list"),
+    webapp2.Route('/message/<message_id:\d+>/edit', EditMessageHandler),
+    webapp2.Route('/message/<message_id:\d+>/delete', DeleteMessageHandler),
 ], debug=True)

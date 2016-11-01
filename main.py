@@ -4,6 +4,8 @@ import os
 import jinja2
 import webapp2
 from google.appengine.ext import ndb
+from google.appengine.api import users
+
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -32,7 +34,16 @@ class BaseHandler(webapp2.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         hommesse = Message.query(Message.deleted == False).fetch()
-        params = {"hommesse": hommesse}
+        user = users.get_current_user()
+        logged_in = user is not None
+
+        params = {"hommesse": hommesse, "user": user, "logged_in": logged_in}
+
+        if logged_in:
+            params["logout_url"] = users.create_logout_url('/')
+        else:
+            params["login_url"] =  users.create_login_url('/')
+            
         return self.render_template("hello.html", params=params)
 
     def post(self):
